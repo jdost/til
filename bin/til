@@ -1,10 +1,11 @@
 #!/bin/sh
 
-TIL_ROOTDIR=$(dirname $(realpath $0))/..
+TIL_ROOTDIR="$(dirname $(realpath $0))/.."
+TILHOME=${TILHOME:-$TIL_ROOTDIR}
 SUBCOMMAND=${1:-browse}
 CUR_DIR=$PWD
 
-cd $TIL_ROOTDIR
+cd $TILHOME
 case $1 in
    "import")
       echo $(readlink --canonicalize "$TIL_ROOTDIR")/bin/_$2
@@ -13,7 +14,7 @@ case $1 in
       git commit -av
       ;;
    *)
-      ./bin/$SUBCOMMAND ${*:2}
+      $TIL_ROOTDIR/bin/$SUBCOMMAND ${*:2}
       ;;
 esac
 cd $CUR_DIR

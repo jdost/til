@@ -2,4 +2,4 @@
 
 source $(til import lib)
 
-vim $TIL_ROOT/docs
+_vim $TIL_ROOT/docs

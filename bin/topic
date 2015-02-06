@@ -5,5 +5,5 @@ TOPIC_FILE=$DOCS_ROOT/topic/$1.$DOC_SUFFIX
 
 init_file $TOPIC_FILE
 
-vim $TOPIC_FILE
+_vim $TOPIC_FILE
 git add $TOPIC_FILE

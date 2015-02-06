@@ -1,6 +1,12 @@
-TIL_ROOT=$(dirname $(realpath $0))/..
-DOCS_ROOT=$(dirname $(realpath $0))/../docs
+TIL_ROOT="$(dirname $(realpath $0))/.."
+TILHOME=${TILHOME:-$TIL_ROOTDIR}
 DOC_SUFFIX=md
+if [[ $TILHOME == $TIL_ROOTDIR ]]; then
+   DOCS_ROOT=$TILHOME/docs
+else
+   DOCS_ROOT=$TILHOME
+fi
+
 VERBOSE=0
 
 log() {
@@ -23,6 +29,12 @@ init_file() {
       log "Initializing $FILENAME\..."
       touch $FILENAME
    fi
+}
+
+_vim() {
+   local FILENAME=$1
+   local VIM_SUPPLEMENT=$TIL_ROOT/etc/vimrc
+   vim -S $VIM_SUPPLEMENT + $FILENAME
 }
 
 # vim: ft=sh

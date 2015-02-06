@@ -5,5 +5,5 @@ PROJECT_FILE=$DOCS_ROOT/projects/$1.$DOC_SUFFIX
 
 init_file $PROJECT_FILE
 
-vim $PROJECT_FILE
+_vim $PROJECT_FILE
 git add $PROJECT_FILE

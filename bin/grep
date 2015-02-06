@@ -5,7 +5,7 @@ SEARCH_DIR=$(echo $DOCS_ROOT | sed 's/\.\.\// /g' | cut -d' ' -f2)
 
 case "$1" in
    "-p") SEARCH_DIR+="/projects"; shift;;
-   "-d") SEARCH_DIR+="/201*"; shift;;
+   "-d") SEARCH_DIR+="/diary"; shift;;
    "-t") SEARCH_DIR+="/topics"; shift;;
 esac
 

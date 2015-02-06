@@ -1,0 +1,6 @@
+augroup til_md
+   autocmd FileType markdown syn match tilTag "+\a\+"
+   autocmd FileType markdown hi def link tilTag Constant
+augroup END
+
+filetype detect

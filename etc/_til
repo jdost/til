@@ -1,0 +1,6 @@
+#compdef til
+
+ARGUMENTS=( browse commit diary grep project topic )
+compadd -a ARGUMENTS
+
+# vim: ft=zsh

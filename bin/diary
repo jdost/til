@@ -3,7 +3,7 @@
 DEFAULT="# "
 
 source $(til import lib)
-ENTRY=$DOCS_ROOT/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
+ENTRY=$DOCS_ROOT/diary/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
 HEADER="${1:-$DEFAULT} $(date +"%A - %D")"
 
 init_file $ENTRY
@@ -12,5 +12,5 @@ if [[ ! -s $ENTRY ]]; then
    echo "$HEADER" > $ENTRY
 fi
 
-vim $ENTRY
+_vim $ENTRY
 git add $ENTRY
