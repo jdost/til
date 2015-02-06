@@ -3,7 +3,7 @@
 DEFAULT="# "
 
 source $(til import lib)
-ENTRY=$DOCS_ROOT/$(date +"%Y/%m")/$(date +"%d.md")
+ENTRY=$DOCS_ROOT/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
 HEADER="${1:-$DEFAULT} $(date +"%A - %D")"
 
 init_file $ENTRY

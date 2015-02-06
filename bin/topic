@@ -1,7 +1,7 @@
 #!/bin/sh
 
 source $(til import lib)
-TOPIC_FILE=$DOCS_ROOT/topic/$1.md
+TOPIC_FILE=$DOCS_ROOT/topic/$1.$DOC_SUFFIX
 
 init_file $TOPIC_FILE
 

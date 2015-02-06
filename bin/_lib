@@ -1,5 +1,6 @@
 TIL_ROOT=$(dirname $(realpath $0))/..
 DOCS_ROOT=$(dirname $(realpath $0))/../docs
+DOC_SUFFIX=md
 VERBOSE=0
 
 log() {

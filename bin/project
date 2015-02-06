@@ -1,7 +1,7 @@
 #!/bin/sh
 
 source $(til import lib)
-PROJECT_FILE=$DOCS_ROOT/projects/$1.md
+PROJECT_FILE=$DOCS_ROOT/projects/$1.$DOC_SUFFIX
 
 init_file $PROJECT_FILE
 
