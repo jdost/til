@@ -1,0 +1,9 @@
+#!/bin/sh
+
+source $(til import lib)
+TOPIC_FILE=$DOCS_ROOT/topic/$1.md
+
+init_file $TOPIC_FILE
+
+vim $TOPIC_FILE
+git add $TOPIC_FILE

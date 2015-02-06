@@ -1,0 +1,9 @@
+#!/bin/sh
+
+source $(til import lib)
+PROJECT_FILE=$DOCS_ROOT/projects/$1.md
+
+init_file $PROJECT_FILE
+
+vim $PROJECT_FILE
+git add $PROJECT_FILE

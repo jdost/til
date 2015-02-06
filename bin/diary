@@ -1,0 +1,16 @@
+#!/bin/sh
+
+DEFAULT="# "
+
+source $(til import lib)
+ENTRY=$DOCS_ROOT/$(date +"%Y/%m")/$(date +"%d.md")
+HEADER="${1:-$DEFAULT} $(date +"%A - %D")"
+
+init_file $ENTRY
+
+if [[ ! -s $ENTRY ]]; then
+   echo "$HEADER" > $ENTRY
+fi
+
+vim $ENTRY
+git add $ENTRY

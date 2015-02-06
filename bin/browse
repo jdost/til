@@ -1,0 +1,5 @@
+#!/bin/sh
+
+source $(til import lib)
+
+vim $TIL_ROOT/docs

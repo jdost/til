@@ -1,0 +1,27 @@
+TIL_ROOT=$(dirname $(realpath $0))/..
+DOCS_ROOT=$(dirname $(realpath $0))/../docs
+VERBOSE=0
+
+log() {
+   if [[ $VERBOSE == "1" ]]; then
+      echo $1
+   fi
+}
+
+init_file() {
+   local FILENAME=$1
+   local PARTCOUNT=$(echo $FILENAME | tr '/' ' ' | wc -w)
+   local DIRNAME=$(echo $FILENAME | cut -d'/' -f-$PARTCOUNT)
+
+   if [[ ! -d $DIRNAME ]]; then
+      log "Creating $DIRNAME\..."
+      mkdir -p $DIRNAME
+   fi
+
+   if [[ ! -f $FILENAME ]]; then
+      log "Initializing $FILENAME\..."
+      touch $FILENAME
+   fi
+}
+
+# vim: ft=sh

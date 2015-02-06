@@ -1,0 +1,19 @@
+#!/bin/sh
+
+TIL_ROOTDIR=$(dirname $(realpath $0))/..
+SUBCOMMAND=${1:-browse}
+CUR_DIR=$PWD
+
+cd $TIL_ROOTDIR
+case $1 in
+   "import")
+      echo $(readlink --canonicalize "$TIL_ROOTDIR")/bin/_$2
+      ;;
+   "commit")
+      git commit -av
+      ;;
+   *)
+      ./bin/$SUBCOMMAND ${*:2}
+      ;;
+esac
+cd $CUR_DIR
