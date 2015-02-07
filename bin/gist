@@ -1,0 +1,29 @@
+#!/bin/sh
+
+source $(til import lib)
+GIST_ROOT=$DOCS_ROOT/gists
+TMP_FILE=$GIST_ROOT/$(date +"%s").$DOC_SUFFIX
+
+show_help $1 "til gist - til gist manager
+
+USAGE: til gist
+
+Opens a new file that will be added to the gist folder when finished.
+"
+
+case $1 in
+   *)
+      init_file $TMP_FILE
+      _edit $TMP_FILE
+      if is_empty $TMP_FILE; then
+         rm $TMP_FILE
+      else
+         GIST_FILE=$GIST_ROOT/$(sha256sum $TMP_FILE |
+            cut -d' ' -f1 |
+            sed 's/^\(........\).*/\1/').$DOC_SUFFIX
+
+         mv $TMP_FILE $GIST_FILE
+         git add $GIST_FILE
+      fi
+      ;;
+esac
