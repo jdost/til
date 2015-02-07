@@ -1,17 +1,28 @@
 #!/bin/sh
 
 source $(til import lib)
-TOPIC_FILE=$DOCS_ROOT/topic/$1.$DOC_SUFFIX
+TOPIC_ROOT=$DOCS_ROOT/topics
+TOPIC_FILE=$TOPIC_ROOT/$1.$DOC_SUFFIX
 
 show_help $1 "til topic - til topic handler
 
-USAGE: til topic <topic>
+USAGE: til topic [options] <topic>
 
 Opens a new/existing file for the specified topic/subtopic.  <topic> can be
 hierarchical such as 'topic/subtopic'.
+
+Options:
+  -l|--list - list existing topics
 "
 
-init_file $TOPIC_FILE
+case $1 in
+   -l|--list)
+      ls_clean $TOPIC_ROOT
+      ;;
+   *)
+      init_file $TOPIC_FILE
 
-_vim $TOPIC_FILE
-git add $TOPIC_FILE
+      _vim $TOPIC_FILE
+      git add $TOPIC_FILE
+      ;;
+esac

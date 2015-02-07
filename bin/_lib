@@ -45,4 +45,11 @@ _vim() {
    vim -S $VIM_SUPPLEMENT + $FILENAME
 }
 
+ls_clean() {
+   local DIRNAME=$1
+   find $DIRNAME -name "*.$DOC_SUFFIX" |
+      sed "s/$(echo $DIRNAME/ | sed 's/\//\\\//g')//g" |
+      sed 's/\.md//g'
+}
+
 # vim: ft=sh

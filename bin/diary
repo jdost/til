@@ -3,21 +3,32 @@
 DEFAULT="# "
 
 source $(til import lib)
-ENTRY=$DOCS_ROOT/diary/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
+DIARY_ROOT=$DOCS_ROOT/diary
+ENTRY=$DIARY_ROOT/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
 HEADER="${1:-$DEFAULT} $(date +"%A - %D")"
 
 show_help $1 "til diary - til logbook editor
 
-USAGE til diary
+USAGE til diary [options]
 
 Opens a logbook/diary entry for the current day.
+
+Options:
+  -l|--list - list existing entries
 "
 
-init_file $ENTRY
+case $1 in
+   -l|--list)
+      ls_clean $DIARY_ROOT
+      ;;
+   *)
+      init_file $ENTRY
 
-if [[ ! -s $ENTRY ]]; then
-   echo "$HEADER" > $ENTRY
-fi
+      if [[ ! -s $ENTRY ]]; then
+         echo "$HEADER" > $ENTRY
+      fi
 
-_vim $ENTRY
-git add $ENTRY
+      _vim $ENTRY
+      git add $ENTRY
+   ;;
+esac
