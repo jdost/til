@@ -22,7 +22,6 @@ case $1 in
    *)
       init_file $TOPIC_FILE
 
-      _vim $TOPIC_FILE
-      git add $TOPIC_FILE
+      _edit $TOPIC_FILE && git add $TOPIC_FILE
       ;;
 esac

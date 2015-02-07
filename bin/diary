@@ -22,13 +22,19 @@ case $1 in
       ls_clean $DIARY_ROOT
       ;;
    *)
+      INITIAL=0
       init_file $ENTRY
 
       if [[ ! -s $ENTRY ]]; then
          echo "$HEADER" > $ENTRY
+         INTITIAL=1
       fi
 
-      _vim $ENTRY
-      git add $ENTRY
+      _edit $ENTRY
+      if [[ $? ]]; then
+         git add $ENTRY
+      elif [[ "$INITIAL" == "1" ]]; then
+         rm $ENTRY
+      fi
    ;;
 esac
