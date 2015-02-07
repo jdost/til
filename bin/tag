@@ -8,4 +8,12 @@ else
    SEARCH_DIR="."
 fi
 
+show_help $1 "til tag - til repository tag locator
+
+USAGE: til tag <tag>
+
+Searches for the specified tag in entries in the til repository, tags are anything
+with a + prefix.
+"
+
 ack -l $TAG $SEARCH_DIR | cut -d'.' -f1

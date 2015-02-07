@@ -6,6 +6,13 @@ source $(til import lib)
 ENTRY=$DOCS_ROOT/diary/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
 HEADER="${1:-$DEFAULT} $(date +"%A - %D")"
 
+show_help $1 "til diary - til logbook editor
+
+USAGE til diary
+
+Opens a logbook/diary entry for the current day.
+"
+
 init_file $ENTRY
 
 if [[ ! -s $ENTRY ]]; then

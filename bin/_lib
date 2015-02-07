@@ -31,6 +31,14 @@ init_file() {
    fi
 }
 
+show_help() {
+   case $1 in
+      -h|--help)
+         echo -e "$2"
+         exit 0;;
+   esac
+}
+
 _vim() {
    local FILENAME=$1
    local VIM_SUPPLEMENT=$TIL_ROOT/etc/vimrc

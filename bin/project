@@ -3,6 +3,13 @@
 source $(til import lib)
 PROJECT_FILE=$DOCS_ROOT/projects/$1.$DOC_SUFFIX
 
+show_help $1 "til project - til project description handler
+
+USAGE: til project <project>
+
+Opens a new/existing file for the specified project.
+"
+
 init_file $PROJECT_FILE
 
 _vim $PROJECT_FILE

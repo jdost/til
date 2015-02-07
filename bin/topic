@@ -3,6 +3,14 @@
 source $(til import lib)
 TOPIC_FILE=$DOCS_ROOT/topic/$1.$DOC_SUFFIX
 
+show_help $1 "til topic - til topic handler
+
+USAGE: til topic <topic>
+
+Opens a new/existing file for the specified topic/subtopic.  <topic> can be
+hierarchical such as 'topic/subtopic'.
+"
+
 init_file $TOPIC_FILE
 
 _vim $TOPIC_FILE

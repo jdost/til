@@ -1,7 +1,21 @@
 #!/bin/sh
 
 source $(til import lib)
-SEARCH_DIR=$(echo $DOCS_ROOT | sed 's/\.\.\// /g' | cut -d' ' -f2)
+if [[ $TIL_ROOTDIR == $TILHOME ]]; then
+   SEARCH_DIR="docs/"
+else
+   SEARCH_DIR="."
+fi
+
+show_help $1 "til grep - til repository search
+
+USAGE: til grep [options] <query string>
+
+Options are:
+ -p - limits search to project entries
+ -d - limits search to diary entries
+ -t - limits search to topics entries
+"
 
 case "$1" in
    "-p") SEARCH_DIR+="/projects"; shift;;

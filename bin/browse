@@ -2,4 +2,11 @@
 
 source $(til import lib)
 
+show_help $1 "til browse - til repository browser
+
+USAGE: til browse
+
+Opens vim with the repository root.
+"
+
 _vim $TIL_ROOT/docs

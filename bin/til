@@ -1,6 +1,26 @@
 #!/bin/sh
 
 TIL_ROOTDIR="$(dirname $(realpath $0))/.."
+source $(readlink --canonicalize "$TIL_ROOTDIR/bin/_lib")
+
+show_help $1 "til - command line management of knowledge repository
+
+USAGE: til <action> [options]
+
+type the command with -h|--help to view information about it.
+
+Actions are:
+  browse  - opens browser of repository directory
+  commit  - commits current changes to the git repository
+  diary   - opens the current day's logbook entry for editting
+  grep    - searches for a phrase in the repository
+  project - opens a new/existing entry for a specified project
+  tag     - shows entries containing the specified tag
+  topic   - opens a new/existing entry for a topic or subtopic
+"
+
+
+
 TILHOME=${TILHOME:-$TIL_ROOTDIR}
 SUBCOMMAND=${1:-browse}
 CUR_DIR=$PWD
