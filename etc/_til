@@ -1,6 +1,42 @@
 #compdef til
 
-ARGUMENTS=( browse commit diary grep project topic )
-compadd -a ARGUMENTS
+typeset -A opt_args
+
+TIL_ROOTDIR="$(dirname $(readlink -f $(which til)))/.."
+source $(readlink --canonicalize "$TIL_ROOTDIR/bin/_lib")
+
+TILHOME=${TILHOME:-$TIL_ROOTDIR}
+
+_arguments -C \
+   '1: :->cmds' \
+   '2: :->existing_lists' \
+   '*: :->args' \
+&& return 0
+
+case "$state" in
+   (cmds)
+      local commands; commands=(
+         browse commit diary grep project topic
+      )
+
+      _describe -t commands 'command' commands && return 0
+      ;;
+   (existing_lists)
+      case "$line[1]" in
+         (project)
+            _arguments '2:projects:($(ls_clean $TILHOME/projects))'
+            ;;
+         (topic)
+            _arguments '2:topics:($(ls_clean $TILHOME/topics))'
+            ;;
+         (*)
+            ;;
+      esac
+      ;;
+   (args)
+      ;;
+esac
+
+return 1
 
 # vim: ft=zsh
