@@ -69,4 +69,10 @@ is_empty() {
    return 1
 }
 
+setup_remote() {
+   if [[ -z "$(git config --get branch.master.remote)" ]]; then
+      git branch --set-upstream-to=origin/master master
+   fi
+}
+
 # vim: ft=sh

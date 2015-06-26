@@ -16,7 +16,7 @@ _arguments -C \
 case "$state" in
    (cmds)
       local commands; commands=(
-         browse commit diary grep project topic
+         browse commit diary grep project tag topic save sync
       )
 
       _describe -t commands 'command' commands && return 0

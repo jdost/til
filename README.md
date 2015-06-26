@@ -19,6 +19,7 @@ record.  These include:
 * `grep` - Searches through the repository for the pattern, e.g. `til grep TODO`
 * `tag` - Lists files that contain the given tag, tags are denoted with a `+`
 * `commit` - Commits the current state to a git repository
+* `sync` - Pushes/Pulls the local repository if a remote is defined
 
 ## Setup
 

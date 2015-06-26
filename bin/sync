@@ -1,0 +1,22 @@
+#!/bin/sh
+
+source $(til import lib)
+
+show_help $1 "til sync - til remote synchronize
+
+USAGE: til sync
+
+If there is a remote endpoint, will attempt to synchronize the contents between the
+local and remote endpoint.
+"
+
+LOCAL="$PWD"
+cd $TILHOME
+
+if [[ -n "$(git remote -v)" ]]; then
+   setup_remote
+   git pull --rebase
+   git push
+fi
+
+cd $LOCAL
