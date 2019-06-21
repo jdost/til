@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -euo pipefail
+
+show_help() {
+    cat <<-HELP
+til browse - til repository browser
+
+USAGE: til browse [<sub-directory>]
+
+Opens editor with the repository root or a specified sub-directory.
+HELP
+}
+
+TARGET_DIR=$DOCS_ROOT
+
+while (( $# )); do
+    case "$1" in
+        "-h"|"--help")
+            show_help
+            exit 1
+            ;;
+        *)
+            $TARGET_DIR=$DOCS_ROOT/$1
+            ;;
+    esac
+    shift
+done
+
+_edit $TARGET_DIR
+exit $?

@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -euo pipefail
+
+show_help() {
+    cat <<-HELP
+til gist - til gist manager
+
+USAGE: til gist
+
+Opens a new file that will be added to the gist folder when finished.
+HELP
+}
+
+GIST_ROOT=$DOCS_ROOT/gists
+TMP_FILE=$GIST_ROOT/$(date +"%s").$DOC_SUFFIX
+
+while (( $# )); do
+    case $1 in
+        "-h"|"--help")
+            show_help
+            exit 1
+            ;;
+        *)
+            ;;
+    esac
+    shift
+done
+
+init_file $TMP_FILE
+_edit $TMP_FILE
+
+if is_empty $TMP_FILE; then
+    rm $TMP_FILE
+else
+    DOC_SHASUM=$(
+        sha256sum $TMP_FILE
+            | cut -d' ' -f1
+            | sed 's/^\(........\).*/\1/'
+        )
+    GIST_FILE="$GIST_ROOT/$DOC_SHASUM.$DOC_SUFFIX"
+
+    mv $TMP_FILE $GIST_FILE
+    git add $GIST_FILE
+fi

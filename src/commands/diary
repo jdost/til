@@ -1,0 +1,54 @@
+#!/bin/sh
+
+set -euo pipefail
+
+show_help() {
+    cat <<-HELP
+til diary - til logbook editor
+
+USAGE til diary [options]
+
+Opens a logbook/diary entry for the current day.
+
+Options:
+  -l|--list - list existing entries
+HELP
+}
+
+DEFAULT="# "
+
+DIARY_ROOT=$DOCS_ROOT/diary
+ENTRY=$DIARY_ROOT/$(date +"%Y/%m")/$(date +"%d").$DOC_SUFFIX
+HEADER="${1:-$DEFAULT} $(date +"%A - %D")"
+INITIAL=0
+
+[[ ! -d "$DIARY_ROOT" ]] && mkdir -p "$DIARY_ROOT"
+
+while (( $# )); do
+    case $1 in
+        "-h"|"--help")
+            show_help
+            exit 1
+            ;;
+        "-l"|"--list")
+            ls_clean $DIARY_ROOT
+            exit $?
+            ;;
+        *)
+            ;;
+    esac
+    shift
+done
+
+init_file $ENTRY
+
+if [[ ! -s $ENTRY ]]; then
+    echo "$HEADER" > $ENTRY
+    INTITIAL=1
+fi
+
+if _edit $ENTRY; then
+    git add $ENTRY
+elif [[ "$INITIAL" == "1" ]]; then
+    rm $ENTRY
+fi

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -euo pipefail
+
+show_help() {
+    cat <<-HELP
+til topic - til topic handler
+
+USAGE: til topic [options] <topic>
+
+Opens a new/existing file for the specified topic/subtopic.  <topic> can be
+hierarchical such as 'topic/subtopic'.
+
+Options:
+  -l|--list - list existing topics
+HELP
+}
+
+TOPIC_ROOT=$DOCS_ROOT/topics
+TOPIC_FILE=$TOPIC_ROOT/$1.$DOC_SUFFIX
+
+while (( $# )); do
+    case "$1" in
+        "-h"|"--help")
+            show_help
+            exit 1
+            ;;
+        "-l"|"--list")
+            ls_clean $TOPIC_ROOT
+            ;;
+        *)
+            init_file $TOPIC_FILE
+            _edit $TOPIC_FILE && git add $TOPIC_FILE
+        ;;
+    esac
+    shift
+done

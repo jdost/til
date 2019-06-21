@@ -1,22 +1,20 @@
 #!/bin/sh
 
-source $(til import lib)
+set -euo pipefail
 
-show_help $1 "til sync - til remote synchronize
+show_help() {
+    cat <<-HELP
+til sync - til remote synchronize
 
 USAGE: til sync
 
 If there is a remote endpoint, will attempt to synchronize the contents between the
 local and remote endpoint.
-"
-
-LOCAL="$PWD"
-cd $TILHOME
+HELP
+}
 
 if [[ -n "$(git remote -v)" ]]; then
    setup_remote
    git pull --rebase
    git push
 fi
-
-cd $LOCAL

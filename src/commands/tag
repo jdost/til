@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -euo pipefail
+
+show_help() {
+    cat <<-HELP
+til tag - til repository tag locator
+
+USAGE: til tag <tag>
+
+Searches for the specified tag in entries in the til repository, tags are anything
+with a + prefix.
+HELP
+}
+
+
+SEARCH_DIR="$TILHOME"
+# If this points at the src dir, use the subfolder
+if [[ $TIL_ROOTDIR == $TILHOME ]]; then
+   SEARCH_DIR="$TILHOME/docs"
+fi
+
+while (( $# )); do
+    case "$1" in
+        "-h"|"--help")
+            show_help
+            exit 1
+            ;;
+        *)
+            TAG=$1
+            ;;
+    esac
+    shift
+done
+
+if [[ -z "${TAG:-''}" ]]; then
+    show_help
+    exit 1
+fi
+
+ack -l $TAG $SEARCH_DIR | cut -d'.' -f1

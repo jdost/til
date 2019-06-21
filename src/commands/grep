@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -euo pipefail
+
+show_help() {
+    cat <<-HELP
+til grep - til repository search
+
+USAGE: til grep [options] <query string>
+
+Options are:
+ -p | --project - limits search to project entries
+ -d | --diary - limits search to diary entries
+ -t | --toipic - limits search to topics entries
+HELP
+}
+
+SEARCH_DIR="$TILHOME"
+# If this points at the src dir, use the subfolder
+if [[ $TIL_ROOTDIR == $TILHOME ]]; then
+   SEARCH_DIR="$TILHOME/docs"
+fi
+
+case "$1" in
+    "-h"|"--help")
+        show_help
+        exit 1
+        ;;
+    "-p"|"--project")
+        SEARCH_DIR="$SEARCH_DIR/projects";
+        shift
+        ;;
+    "-d"|"--diary")
+        SEARCH_DIR="$SEARCH_DIR/diary";
+        shift
+        ;;
+    "-t"|"--topic")
+        SEARCH_DIR="$SEARCH_DIR/topics";
+        shift
+        ;;
+    *)  ;;
+esac
+
+ack $* $SEARCH_DIR

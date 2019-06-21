@@ -3,9 +3,9 @@ elif [[ -s $HOME/.tilrc ]]; then source $HOME/.tilrc
 elif [[ -s /etc/tilrc ]]; then source /etc/tilrc
 fi
 
-TIL_ROOT="$(dirname $(realpath $0))/.."
 TILHOME=${TILHOME:-$TIL_ROOTDIR}
 DOC_SUFFIX=${DOC_SUFFIX:-md}
+
 if [[ $TILHOME == $TIL_ROOTDIR ]]; then
    DOCS_ROOT=$TILHOME/docs
 else
@@ -48,7 +48,7 @@ show_help() {
 
 _edit() {
    local FILENAME=$1
-   local VIM_SUPPLEMENT=$TIL_ROOT/etc/vimrc
+   local VIM_SUPPLEMENT=$TIL_ROOTDIR/etc/vimrc
    [[ -f $FILENAME ]] && local PRE_HASH=$(sha256sum -t $FILENAME)
    vim -S $VIM_SUPPLEMENT + $FILENAME
    [[ -d $FILENAME ]] && return 1
