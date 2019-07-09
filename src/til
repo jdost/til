@@ -21,6 +21,7 @@ Actions are:
   grep    - searches for a phrase in the repository
   project - opens a new/existing entry for a specified project
   tag     - shows entries containing the specified tag
+  todo    - manage todo list
   topic   - opens a new/existing entry for a topic or subtopic
   sync    - if a remote repository is defined, will attempt to sync with it
 HELP
