@@ -40,5 +40,5 @@ fi
 
 init_file $PROJECT_FILE
 
-_edit $PROJECT_FILE && git add $PROJECT_FILE
+_edit $PROJECT_FILE && _add $PROJECT_FILE
 is_empty $PROJECT_FILE && rm $PROJECT_FILE

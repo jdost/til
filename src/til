@@ -46,6 +46,12 @@ while (( $# )); do
         *)
             ACTION="$1"
             shift
+            if [[ ! -e "$TIL_ROOTDIR/src/commands/$ACTION" ]]; then
+               echo "Unknown action: $ACTION"
+               echo ""
+               show_help
+               exit 2
+            fi
             source $(readlink --canonicalize "$TIL_ROOTDIR/src/commands/$ACTION")
             break
             ;;

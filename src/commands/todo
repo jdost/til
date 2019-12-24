@@ -110,14 +110,14 @@ flag {
 
 ARGS=""
 while (( $# )); do
-    case "$1" in
+    case "${1:-}" in
         "-h"|"--help")
             show_help
             exit 1
             ;;
         "-l"|"--list")
             shift
-            LIST=$1
+            LIST=${1:-}
             ;;
         "-c"|"--complete")
             SHOW_COMPLETE=1
@@ -174,4 +174,4 @@ case $ACTION in
         ;;
 esac
 
-git add $TODOFILE
+_add $TODOFILE

@@ -41,5 +41,5 @@ else
     GIST_FILE="$GIST_ROOT/$DOC_SHASUM.$DOC_SUFFIX"
 
     mv $TMP_FILE $GIST_FILE
-    git add $GIST_FILE
+    _add $GIST_FILE
 fi

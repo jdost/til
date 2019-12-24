@@ -16,8 +16,17 @@ Options:
 HELP
 }
 
+if [[ $# < 1 ]]; then
+    show_help
+    exit 1
+fi
+
 TOPIC_ROOT=$DOCS_ROOT/topics
-TOPIC_FILE=$TOPIC_ROOT/$1.$DOC_SUFFIX
+
+if [[ ! -d $TOPIC_ROOT ]]; then
+    log "Creating $TOPIC_ROOT\..."
+    mkdir -p $TOPIC_ROOT
+fi
 
 while (( $# )); do
     case "$1" in
@@ -29,8 +38,9 @@ while (( $# )); do
             ls_clean $TOPIC_ROOT
             ;;
         *)
+            TOPIC_FILE=$TOPIC_ROOT/$1.$DOC_SUFFIX
             init_file $TOPIC_FILE
-            _edit $TOPIC_FILE && git add $TOPIC_FILE
+            _edit $TOPIC_FILE && _add $TOPIC_FILE
         ;;
     esac
     shift

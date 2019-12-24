@@ -48,7 +48,7 @@ if [[ ! -s $ENTRY ]]; then
 fi
 
 if _edit $ENTRY; then
-    git add $ENTRY
+    _add $ENTRY
 elif [[ "$INITIAL" == "1" ]]; then
     rm $ENTRY
 fi

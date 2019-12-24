@@ -24,8 +24,7 @@ log() {
 
 init_file() {
    local FILENAME=$1
-   local PARTCOUNT=$(echo $FILENAME | tr '/' ' ' | wc -w)
-   local DIRNAME=$(echo $FILENAME | cut -d'/' -f-$PARTCOUNT)
+   local DIRNAME=$(echo $FILENAME | rev | cut -d'/' -f2- | rev)
 
    if [[ ! -d $DIRNAME ]]; then
       log "Creating $DIRNAME\..."
@@ -73,6 +72,11 @@ setup_remote() {
    if [[ -z "$(git config --get branch.master.remote)" ]]; then
       git branch --set-upstream-to=origin/master master
    fi
+}
+
+_add() {
+   cd $DOCS_ROOT
+   git add $*
 }
 
 # vim: ft=sh
